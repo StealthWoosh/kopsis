@@ -135,7 +135,7 @@ export default function ProductDetails({ params }) {
             marginBottom: '8px',
             textTransform: 'uppercase'
           }}>
-            Harga Per Es Krim
+            Price Per Unit
           </div>
           <div style={{ 
             fontSize: '24px', 
@@ -161,7 +161,7 @@ export default function ProductDetails({ params }) {
             opacity: 0.9,
             marginBottom: '8px'
           }}>
-            Yang Sudah Terjual
+            Quantity Sold
           </div>
           <div style={{ fontSize: '48px', fontWeight: 'bold', color: '#ffffff' }}>
             {product.quantitySold || 0}
@@ -185,7 +185,7 @@ export default function ProductDetails({ params }) {
             marginBottom: '8px',
             textTransform: 'uppercase'
           }}>
-            Total Penjualan
+            Total Revenue
           </div>
           <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--success)' }}>
             {formatRupiah(totalRevenue)}
@@ -216,7 +216,7 @@ export default function ProductDetails({ params }) {
                 cursor: 'pointer'
               }}
             >
-              +1 Penjualan
+              +1 Sale
             </button>
             <button
               onClick={() => recordSale(5)}
@@ -231,7 +231,7 @@ export default function ProductDetails({ params }) {
                 cursor: 'pointer'
               }}
             >
-              +5 Penjualan
+              +5 Sales
             </button>
             <button
               onClick={() => recordSale(10)}
@@ -246,7 +246,7 @@ export default function ProductDetails({ params }) {
                 cursor: 'pointer'
               }}
             >
-              +10 Penjualan
+              +10 Sales
             </button>
             <button
               onClick={() => removeSale(1)}
@@ -263,7 +263,7 @@ export default function ProductDetails({ params }) {
                 opacity: (product.quantitySold || 0) === 0 ? 0.5 : 1
               }}
             >
-              -1 Penjualan
+              -1 Sale
             </button>
             <button
               onClick={() => removeSale(5)}
@@ -280,7 +280,7 @@ export default function ProductDetails({ params }) {
                 opacity: (product.quantitySold || 0) < 5 ? 0.5 : 1
               }}
             >
-              -5 Penjualan
+              -5 Sales
             </button>
             <button
               onClick={() => removeSale(10)}
@@ -297,7 +297,7 @@ export default function ProductDetails({ params }) {
                 opacity: (product.quantitySold || 0) < 10 ? 0.5 : 1
               }}
             >
-              -10 Penjualan
+              -10 Sales
             </button>
           </div>
         </div>
@@ -316,7 +316,7 @@ export default function ProductDetails({ params }) {
             color: 'var(--text)',
             marginBottom: '12px'
           }}>
-            Kostum Pemasangan Penjualan
+            Record Custom Sale
           </h3>
           <div style={{ display: 'flex', gap: '12px', marginBottom: '16px', alignItems: 'center' }}>
             <button
@@ -392,7 +392,7 @@ export default function ProductDetails({ params }) {
               }}
             >
               <span>✓</span>
-              <span>Tambah {quantity}</span>
+              <span>Add {quantity}</span>
             </button>
             <button
               onClick={() => removeSale(quantity)}
@@ -415,7 +415,7 @@ export default function ProductDetails({ params }) {
               }}
             >
               <span>−</span>
-              <span>Kurangi {quantity}</span>
+              <span>Remove {quantity}</span>
             </button>
           </div>
         </div>
@@ -440,7 +440,7 @@ export default function ProductDetails({ params }) {
           }}
         >
           <span>🗑️</span>
-          <span>Hapus Produk</span>
+          <span>Delete Product</span>
         </button>
       </div>
     </div>
