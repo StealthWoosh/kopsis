@@ -53,9 +53,7 @@ export default function ProductDetails({ params }) {
     );
   }
   
-  const profitPerUnit = (product.sellingPrice || 0) - (product.costPrice || 0);
   const totalRevenue = (product.quantitySold || 0) * (product.sellingPrice || 0);
-  const totalProfit = (product.quantitySold || 0) * profitPerUnit;
   
   const recordSale = (saleQuantity) => {
     if (saleQuantity <= 0) return;
@@ -121,52 +119,7 @@ export default function ProductDetails({ params }) {
       </div>
       
       <div style={{ padding: '16px', paddingBottom: '32px' }}>
-        {/* Product Info Cards */}
-        <div style={{ display: 'flex', gap: '12px', marginBottom: '12px' }}>
-          <div style={{
-            flex: 1,
-            padding: '16px',
-            borderRadius: '12px',
-            backgroundColor: 'var(--card-bg)',
-            border: '1px solid var(--border)'
-          }}>
-            <div style={{ 
-              fontSize: '12px',
-              fontWeight: '500',
-              color: 'var(--text-secondary)',
-              marginBottom: '8px',
-              textTransform: 'uppercase'
-            }}>
-              Cost Price
-            </div>
-            <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'var(--text)' }}>
-              {formatRupiah(product.costPrice)}
-            </div>
-          </div>
-          
-          <div style={{
-            flex: 1,
-            padding: '16px',
-            borderRadius: '12px',
-            backgroundColor: 'var(--card-bg)',
-            border: '1px solid var(--border)'
-          }}>
-            <div style={{ 
-              fontSize: '12px',
-              fontWeight: '500',
-              color: 'var(--text-secondary)',
-              marginBottom: '8px',
-              textTransform: 'uppercase'
-            }}>
-              Selling Price
-            </div>
-            <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'var(--text)' }}>
-              {formatRupiah(product.sellingPrice)}
-            </div>
-          </div>
-        </div>
-        
-        {/* Profit Per Unit */}
+        {/* Product Price Card */}
         <div style={{
           padding: '16px',
           borderRadius: '12px',
@@ -182,14 +135,14 @@ export default function ProductDetails({ params }) {
             marginBottom: '8px',
             textTransform: 'uppercase'
           }}>
-            Profit Per Unit
+            Price Per Unit
           </div>
           <div style={{ 
             fontSize: '24px', 
             fontWeight: 'bold',
-            color: profitPerUnit >= 0 ? 'var(--success)' : 'var(--danger)'
+            color: 'var(--success)'
           }}>
-            {formatRupiah(profitPerUnit)}
+            {formatRupiah(product.sellingPrice || 0)}
           </div>
         </div>
         
@@ -215,55 +168,27 @@ export default function ProductDetails({ params }) {
           </div>
         </div>
         
-        {/* Revenue & Profit */}
-        <div style={{ marginBottom: '20px' }}>
-          <div style={{
-            padding: '20px',
-            borderRadius: '12px',
-            backgroundColor: 'var(--card-bg)',
-            border: '1px solid var(--border)',
-            textAlign: 'center',
-            marginBottom: '12px'
+        {/* Total Revenue */}
+        <div style={{
+          padding: '20px',
+          borderRadius: '12px',
+          backgroundColor: 'var(--card-bg)',
+          border: '1px solid var(--border)',
+          textAlign: 'center',
+          marginBottom: '20px'
+        }}>
+          <div style={{ fontSize: '32px', marginBottom: '8px' }}>💰</div>
+          <div style={{ 
+            fontSize: '12px',
+            fontWeight: '500',
+            color: 'var(--text-secondary)',
+            marginBottom: '8px',
+            textTransform: 'uppercase'
           }}>
-            <div style={{ fontSize: '32px', marginBottom: '8px' }}>💰</div>
-            <div style={{ 
-              fontSize: '12px',
-              fontWeight: '500',
-              color: 'var(--text-secondary)',
-              marginBottom: '8px',
-              textTransform: 'uppercase'
-            }}>
-              Total Revenue
-            </div>
-            <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--text)' }}>
-              {formatRupiah(totalRevenue)}
-            </div>
+            Total Revenue
           </div>
-          
-          <div style={{
-            padding: '20px',
-            borderRadius: '12px',
-            backgroundColor: 'var(--card-bg)',
-            border: '1px solid var(--border)',
-            textAlign: 'center'
-          }}>
-            <div style={{ fontSize: '32px', marginBottom: '8px' }}>📈</div>
-            <div style={{ 
-              fontSize: '12px',
-              fontWeight: '500',
-              color: 'var(--text-secondary)',
-              marginBottom: '8px',
-              textTransform: 'uppercase'
-            }}>
-              Total Profit
-            </div>
-            <div style={{ 
-              fontSize: '24px', 
-              fontWeight: 'bold',
-              color: totalProfit >= 0 ? 'var(--success)' : 'var(--danger)'
-            }}>
-              {formatRupiah(totalProfit)}
-            </div>
+          <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--success)' }}>
+            {formatRupiah(totalRevenue)}
           </div>
         </div>
         

@@ -1,4 +1,4 @@
-    import { create } from 'zustand';
+import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 export const useSalesStore = create(
@@ -35,20 +35,16 @@ export const useSalesStore = create(
       // Get totals
       getTotals: (products) => {
         let totalRevenue = 0;
-        let totalCost = 0;
         let totalItemsSold = 0;
         
         products.forEach(p => {
           const qty = p.quantitySold || 0;
           totalRevenue += (p.sellingPrice || 0) * qty;
-          totalCost += (p.costPrice || 0) * qty;
           totalItemsSold += qty;
         });
         
         return {
           totalRevenue,
-          totalCost,
-          totalProfit: totalRevenue - totalCost,
           totalItemsSold,
         };
       },
