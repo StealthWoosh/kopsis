@@ -57,7 +57,7 @@ export default function Dashboard() {
             fontWeight: 'bold',
             color: 'var(--text)'
           }}>
-            Sales Tracker
+            Oshivema - Kopsis Ice Cream Tracker
           </h1>
           <button
             onClick={toggleTheme}
@@ -78,10 +78,10 @@ export default function Dashboard() {
           </button>
         </div>
         
-        {/* Summary Cards Grid - Only 2 cards now */}
+        {/* Summary Cards Grid */}
         <div style={{ 
           display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
           gap: '16px', 
           marginBottom: '24px' 
         }}>
@@ -96,7 +96,7 @@ export default function Dashboard() {
             flexDirection: 'column',
             alignItems: 'center'
           }}>
-            <div style={{ fontSize: '24px', marginBottom: '12px' }}>🛒</div>
+            <div style={{ fontSize: '24px', marginBottom: '12px' }}>🍦</div>
             <div style={{ 
               fontSize: '18px', 
               fontWeight: '600',
@@ -110,7 +110,7 @@ export default function Dashboard() {
               color: 'var(--text-secondary)',
               textAlign: 'center'
             }}>
-              Items Sold
+              Es Krim Terjual
             </div>
           </div>
           
@@ -139,7 +139,65 @@ export default function Dashboard() {
               color: 'var(--text-secondary)',
               textAlign: 'center'
             }}>
-              Total Revenue
+              Untung Kotor
+            </div>
+          </div>
+          
+          {/* Cost */}
+          <div style={{
+            backgroundColor: 'var(--card-bg)',
+            borderRadius: '16px',
+            padding: '20px',
+            border: '1px solid var(--border)',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+          }}>
+            <div style={{ fontSize: '24px', marginBottom: '12px' }}>🏷️</div>
+            <div style={{ 
+              fontSize: '18px', 
+              fontWeight: '600',
+              color: 'var(--text)',
+              marginBottom: '4px'
+            }}>
+              {formatRupiah(totals.totalCost)}
+            </div>
+            <div style={{ 
+              fontSize: '12px',
+              color: 'var(--text-secondary)',
+              textAlign: 'center'
+            }}>
+              Harga Asli
+            </div>
+          </div>
+          
+          {/* Profit */}
+          <div style={{
+            backgroundColor: 'var(--card-bg)',
+            borderRadius: '16px',
+            padding: '20px',
+            border: '1px solid var(--border)',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+          }}>
+            <div style={{ fontSize: '24px', marginBottom: '12px' }}>📈</div>
+            <div style={{ 
+              fontSize: '18px', 
+              fontWeight: '600',
+              color: totals.totalProfit >= 0 ? 'var(--success)' : 'var(--danger)',
+              marginBottom: '4px'
+            }}>
+              {formatRupiah(totals.totalProfit)}
+            </div>
+            <div style={{ 
+              fontSize: '12px',
+              color: 'var(--text-secondary)',
+              textAlign: 'center'
+            }}>
+              Profit
             </div>
           </div>
         </div>
@@ -198,7 +256,8 @@ export default function Dashboard() {
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {products.map((product) => {
-              const totalRevenue = (product.quantitySold || 0) * (product.sellingPrice || 0);
+              const unitProfit = (product.sellingPrice || 0) - (product.costPrice || 0);
+              const totalProductProfit = unitProfit * (product.quantitySold || 0);
               
               return (
                 <div
@@ -237,7 +296,7 @@ export default function Dashboard() {
                       {product.name}
                     </h3>
                     
-                    {/* Quick Action Buttons */}
+                    {/* Quick Action Buttons - NOW WITH 3 BUTTONS */}
                     <div style={{ display: 'flex', gap: '8px' }}>
                       {/* Add Sale Button (+) */}
                       <button
@@ -347,7 +406,7 @@ export default function Dashboard() {
                     </span>
                   </div>
                   
-                  {/* Product Details - Only Revenue now */}
+                  {/* Product Details */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     <div style={{ 
                       display: 'flex', 
@@ -358,14 +417,14 @@ export default function Dashboard() {
                         fontSize: '12px',
                         color: 'var(--text-secondary)'
                       }}>
-                        Price per Unit:
+                        Satuan Profit:
                       </span>
                       <span style={{ 
                         fontSize: '16px',
                         fontWeight: '600',
-                        color: 'var(--text)'
+                        color: unitProfit >= 0 ? 'var(--success)' : 'var(--danger)'
                       }}>
-                        {formatRupiah(product.sellingPrice || 0)}
+                        {formatRupiah(unitProfit)}
                       </span>
                     </div>
                     
@@ -378,14 +437,14 @@ export default function Dashboard() {
                         fontSize: '12px',
                         color: 'var(--text-secondary)'
                       }}>
-                        Total Revenue:
+                        Untung Bersih:
                       </span>
                       <span style={{ 
                         fontSize: '18px',
                         fontWeight: '600',
-                        color: 'var(--success)'
+                        color: totalProductProfit >= 0 ? 'var(--success)' : 'var(--danger)'
                       }}>
-                        {formatRupiah(totalRevenue)}
+                        {formatRupiah(totalProductProfit)}
                       </span>
                     </div>
                   </div>

@@ -10,8 +10,11 @@ export default function AddProduct() {
   const router = useRouter();
   
   const [name, setName] = useState('');
+  const [costPrice, setCostPrice] = useState('');
   const [sellingPrice, setSellingPrice] = useState('');
   const [quantitySold, setQuantitySold] = useState('0');
+  
+  const profitPreview = (parseFloat(sellingPrice) || 0) - (parseFloat(costPrice) || 0);
   
   const formatRupiah = (value) => {
     return `Rp ${(value || 0).toLocaleString('id-ID')}`;
@@ -25,6 +28,11 @@ export default function AddProduct() {
       return;
     }
     
+    if (!costPrice || parseFloat(costPrice) < 0) {
+      alert('Please enter a valid cost price');
+      return;
+    }
+    
     if (!sellingPrice || parseFloat(sellingPrice) < 0) {
       alert('Please enter a valid selling price');
       return;
@@ -33,6 +41,7 @@ export default function AddProduct() {
     const newProduct = {
       id: Date.now().toString(),
       name: name.trim(),
+      costPrice: parseFloat(costPrice),
       sellingPrice: parseFloat(sellingPrice),
       quantitySold: parseInt(quantitySold) || 0,
     };
@@ -115,6 +124,34 @@ export default function AddProduct() {
               />
             </div>
             
+            {/* Cost Price */}
+            <div style={{ marginBottom: '16px' }}>
+              <label style={{ 
+                display: 'block',
+                fontSize: '14px',
+                fontWeight: '600',
+                color: 'var(--text)',
+                marginBottom: '8px'
+              }}>
+                Cost Price (Rp)
+              </label>
+              <input
+                type="number"
+                value={costPrice}
+                onChange={(e) => setCostPrice(e.target.value)}
+                placeholder="Enter cost in Rupiah"
+                style={{
+                  width: '100%',
+                  padding: '12px',
+                  borderRadius: '8px',
+                  border: '1px solid var(--border)',
+                  backgroundColor: 'var(--background)',
+                  color: 'var(--text)',
+                  fontSize: '16px'
+                }}
+              />
+            </div>
+            
             {/* Selling Price */}
             <div style={{ marginBottom: '16px' }}>
               <label style={{ 
@@ -124,13 +161,13 @@ export default function AddProduct() {
                 color: 'var(--text)',
                 marginBottom: '8px'
               }}>
-                Price (Rp)
+                Selling Price (Rp)
               </label>
               <input
                 type="number"
                 value={sellingPrice}
                 onChange={(e) => setSellingPrice(e.target.value)}
-                placeholder="Enter price in Rupiah"
+                placeholder="Enter selling price in Rupiah"
                 style={{
                   width: '100%',
                   padding: '12px',
@@ -171,7 +208,7 @@ export default function AddProduct() {
               />
             </div>
             
-            {/* Price Preview */}
+            {/* Profit Preview */}
             <div style={{
               padding: '16px',
               borderRadius: '8px',
@@ -185,14 +222,14 @@ export default function AddProduct() {
                 marginBottom: '8px',
                 textTransform: 'uppercase'
               }}>
-                Price Per Unit
+                Profit Per Unit
               </div>
               <div style={{ 
                 fontSize: '24px',
                 fontWeight: 'bold',
-                color: 'var(--success)'
+                color: profitPreview >= 0 ? 'var(--success)' : 'var(--danger)'
               }}>
-                {formatRupiah(parseFloat(sellingPrice) || 0)}
+                {formatRupiah(profitPreview)}
               </div>
             </div>
           </div>
