@@ -57,7 +57,7 @@ export default function Dashboard() {
             fontWeight: 'bold',
             color: 'var(--text)'
           }}>
-            Sales Tracker
+            Oshivema - Ice Cream Tracker
           </h1>
           <button
             onClick={toggleTheme}
@@ -96,7 +96,7 @@ export default function Dashboard() {
             flexDirection: 'column',
             alignItems: 'center'
           }}>
-            <div style={{ fontSize: '24px', marginBottom: '12px' }}>🛒</div>
+            <div style={{ fontSize: '24px', marginBottom: '12px' }}>🍦</div>
             <div style={{ 
               fontSize: '18px', 
               fontWeight: '600',
@@ -110,7 +110,7 @@ export default function Dashboard() {
               color: 'var(--text-secondary)',
               textAlign: 'center'
             }}>
-              Items Sold
+              Es Krim Terjual
             </div>
           </div>
           
@@ -139,7 +139,7 @@ export default function Dashboard() {
               color: 'var(--text-secondary)',
               textAlign: 'center'
             }}>
-              Total Revenue
+              Total Penjualan
             </div>
           </div>
         </div>
@@ -343,7 +343,7 @@ export default function Dashboard() {
                       fontSize: '12px',
                       color: 'var(--text-secondary)'
                     }}>
-                      {product.quantitySold || 0} sold
+                      {product.quantitySold || 0} Terjual
                     </span>
                   </div>
                   
@@ -358,7 +358,7 @@ export default function Dashboard() {
                         fontSize: '12px',
                         color: 'var(--text-secondary)'
                       }}>
-                        Price per Unit:
+                        Harga Per Es Krim:
                       </span>
                       <span style={{ 
                         fontSize: '16px',
@@ -378,7 +378,7 @@ export default function Dashboard() {
                         fontSize: '12px',
                         color: 'var(--text-secondary)'
                       }}>
-                        Total Revenue:
+                        Total Penjualan:
                       </span>
                       <span style={{ 
                         fontSize: '18px',
